@@ -1,4 +1,4 @@
-import pygame as pg
+# import pygame as pg
 
-window_resolution = pg.get_size()
+# window_resolution = pg.get_size()
 
