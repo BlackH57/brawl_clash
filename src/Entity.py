@@ -9,12 +9,13 @@ class Entity(pg.sprite.Sprite):
 
         self.health = health
         self.speed = speed
-        self.sprite = sprite  # En vrai doit contenir l'image
 
         self.x = x
         self.y = y
         self.bag = Bag.Bag(bag_max, [])
 
+        self.image = pg.image.load(sprite).convert_alpha()
+        self.rect = self.image.get_rect()
 
     def get_coord(self):
         return self.x, self.y

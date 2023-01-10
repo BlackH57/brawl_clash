@@ -1,8 +1,8 @@
-from Object import Object
+from src import Object
 
 
 class Bag:
-    def __init__(self, max_object: int, collection: list[Object]):
+    def __init__(self, max_object: int, collection: list[Object.Object]):
         if collection is None:
             collection = []
 
