@@ -18,7 +18,7 @@ class Entity(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def get_coord(self):
-        return self.x, self.y
+        return self.rect.x, self.rect.y
 
     def get_stats(self):
         return self.health, self.speed
