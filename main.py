@@ -9,7 +9,7 @@ window_surface = pg.display.set_mode(resolution, pg.RESIZABLE) #ouverture de la 
 
 #boucle pour garder la fenêtre ouverte tant qu'on appuie pas sur la croix
 launched = True
-while launched :
+while launched:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             launched = False
