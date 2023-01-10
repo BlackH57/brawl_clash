@@ -4,7 +4,7 @@ import pygame as pg
 
 class Entity(pg.sprite.Sprite):
 
-    def __init__(self, health: int, speed: int, coords: (int, int), bag_max: int, sprite: str):
+    def __init__(self, health: int, speed: int, x:int, y: int, bag_max: int, sprite: str):
         pg.sprite.Sprite.__init__(self)
 
         self.health = health
