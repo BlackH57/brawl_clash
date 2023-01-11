@@ -25,9 +25,9 @@ grid = Map.Map([
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-    ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-    ["W", " ", " ", " ", " ", " ", "W", "W", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-    ["W", " ", " ", " ", " ", " ", " ", " ", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    ["W", " ", " ", " ", " ", "L", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    ["W", " ", " ", " ", " ", "L", "W", "W", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    ["W", " ", " ", " ", " ", "L", " ", " ", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"]
@@ -54,6 +54,11 @@ while launched:
         if wall in ppt.all_moving_sprites:
             window_surface.blit(wall.image, wall.rect)
 
+     # Echelles
+    for ladder in ppt.sprites_ladder:
+        if ladder in ppt.all_moving_sprites:
+            window_surface.blit(ladder.image, ladder.rect)
+
     # Joueur
     player.height_update()
     window_surface.blit(player.image, player.rect)
@@ -74,12 +79,12 @@ while launched:
             camera.move_left()
 
     if game.keypressed.get(pg.K_z):
-        camera.move_up()
+        camera.climb()
         if len(pg.sprite.spritecollide(game.player, ppt.sprites_wall, False)) != 0:
             camera.move_down()
 
     if game.keypressed.get(pg.K_s):
-        camera.move_down()
+        camera.climb()
         if len(pg.sprite.spritecollide(game.player, ppt.sprites_wall, False)) != 0:
             camera.move_up()
 
