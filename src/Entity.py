@@ -46,11 +46,11 @@ class Entity(pg.sprite.Sprite):
     def move_left(self):
         self.rect.x -= self.speed
 
-    def move_down(self):
-        self.rect.y += self.speed
+    # def move_down(self):
+    #     self.rect.y += self.speed
 
-    def move_up(self):
-        self.rect.y -= self.speed
+    # def move_up(self):
+    #     self.rect.y -= self.speed
 
     def jump(self):
         print("je saute")

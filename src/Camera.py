@@ -21,9 +21,13 @@ class Camera:
         for sprite in ppt.all_moving_sprites.sprites():
             sprite.rect.y -= self.game.player.speed
 
-    def climb(self):
-        if self.game.keypressed.get(pg.K_z) and len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
-            self.move_up()
+###################
 
-        if self.game.keypressed.get(pg.K_s) and len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
-            self.move_down()
+    def climb(self):
+        if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
+            self.game.player.jumpSpeed = 0 
+            if self.game.keypressed.get(pg.K_z):
+                self.move_up()
+
+            if self.game.keypressed.get(pg.K_s):
+                self.move_down()
