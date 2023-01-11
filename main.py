@@ -19,7 +19,7 @@ window_surface = pg.display.set_mode(ppt.resolution, pg.RESIZABLE)
 fpsClock = pg.time.Clock()
 
 # Creation des elements du jeu
-player = Player.Player(100, 10, 400, 600, 10)
+player = Player.Player(100, 10, 400, 500, 10)
 grid = Map.Map([
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -55,7 +55,7 @@ while launched:
             window_surface.blit(wall.image, wall.rect)
 
     # Joueur
-    player.height_update()
+    player.fall_update()
     window_surface.blit(player.image, player.rect)
 
     # Mise a jour de l'ecran
@@ -63,25 +63,7 @@ while launched:
     fpsClock.tick(ppt.FPS)
 
     # Mouvement
-    if game.keypressed.get(pg.K_q):
-        camera.move_left()
-        if len(pg.sprite.spritecollide(game.player, ppt.sprites_wall, False)) != 0:
-            camera.move_right()
-
-    if game.keypressed.get(pg.K_d):
-        camera.move_right()
-        if len(pg.sprite.spritecollide(game.player, ppt.sprites_wall, False)) != 0:
-            camera.move_left()
-
-    if game.keypressed.get(pg.K_z):
-        camera.move_up()
-        if len(pg.sprite.spritecollide(game.player, ppt.sprites_wall, False)) != 0:
-            camera.move_down()
-
-    if game.keypressed.get(pg.K_s):
-        camera.move_down()
-        if len(pg.sprite.spritecollide(game.player, ppt.sprites_wall, False)) != 0:
-            camera.move_up()
+    camera.move()
 
     # Gestion des evenements pygame
     for event in pg.event.get():
