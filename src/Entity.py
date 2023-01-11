@@ -61,11 +61,11 @@ class Entity(pg.sprite.Sprite):
     def move_left(self):
         self.rect.x -= self.speed
 
-    # def move_down(self):
-    #     self.rect.y += self.speed
+    def move_down(self):
+        self.rect.y += self.speed
 
-    # def move_up(self):
-    #     self.rect.y -= self.speed
+    def move_up(self):
+        self.rect.y -= self.speed
 
     def jump(self):
         print("je saute")
@@ -88,6 +88,7 @@ class Entity(pg.sprite.Sprite):
         if len(pg.sprite.spritecollide(self, ppt.sprites_wall, False)) == 0:
             fall = True
         self.move_up()
+
         return fall
 
     def fall_update(self):
@@ -102,6 +103,3 @@ class Entity(pg.sprite.Sprite):
                 elif self.jumpSpeed < 0:
                     self.rect.bottom = colliding_sprites[0].rect.top
                 self.jumpSpeed = 0
-
-
-
