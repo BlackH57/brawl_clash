@@ -50,11 +50,35 @@ class Camera:
                     self.move_left(self.game.player.rect.right - sprite.rect.left)
                     break
 
-    def climb(self):
+        # if self.game.keypressed.get(pg.K_z):
+        #     if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
+        #         self.move_up()
+        #         for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
+        #             if sprite.rect.bottom - self.game.player.rect.top >= 0:
+        #                 self.move_down(sprite.rect.bottom - self.game.player.rect.top)
+        #                 break
+
+        # if self.game.keypressed.get(pg.K_s):
+        #     if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
+        #         self.move_down()
+        #         for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
+        #             if sprite.rect.top - self.game.player.rect.bottom <= 0:
+        #                 self.move_left(self.game.player.rect.bottom - sprite.rect.top)
+        #                 break
+
         if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
-            self.game.player.jumpSpeed = 0 
+            
             if self.game.keypressed.get(pg.K_z):
-                self.move_up()
+                for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
+                    if self.game.player.rect.top - sprite.rect.bottom <= 0:
+                        self.game.player.move_up()
+                        break
+                self.game.player.move_up()
 
             if self.game.keypressed.get(pg.K_s):
-                self.move_down()
+                for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
+                    if self.game.player.rect.bottom - sprite.rect.top >= 0:
+                        self.game.player.move_down()
+                        break
+                self.game.player.move_down()
+                

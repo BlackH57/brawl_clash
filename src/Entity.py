@@ -68,7 +68,6 @@ class Entity(pg.sprite.Sprite):
         self.rect.y -= self.speed
 
     def jump(self):
-        print("je saute")
         if not self.isFalling():
             self.jumpSpeed = self.jumpAcceleration
 
@@ -82,6 +81,9 @@ class Entity(pg.sprite.Sprite):
     def isFalling(self):
         if self.jumpSpeed > 0:
             return True
+
+        if len(pg.sprite.spritecollide(self, ppt.sprites_ladder, False)) != 0:
+            return False
 
         self.move_down()
         fall = False
