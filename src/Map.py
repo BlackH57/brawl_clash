@@ -1,6 +1,7 @@
 import pygame as pg
 import properties as ppt
 from src import Wall
+from src import Ladder
 
 
 class Map:
@@ -23,3 +24,9 @@ class Map:
                     self.walls.append(wall)
                     ppt.sprites_wall.add(wall)
                     ppt.all_moving_sprites.add(wall)
+
+                if block == "L":
+                    ladder = Ladder.Ladder(i * size_block, j * size_block)
+                    ladder.rescale(size_block)
+                    ppt.sprites_ladder.add(ladder)
+                    ppt.all_moving_sprites.add(ladder)
