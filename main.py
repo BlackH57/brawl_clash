@@ -20,8 +20,9 @@ window_surface = pg.display.set_mode(ppt.resolution, pg.RESIZABLE)
 fpsClock = pg.time.Clock()
 
 # Creation des elements du jeu
-player = Player.Player(100, 10, 400, 500, 10)
+player = Player.Player(100, 10, 20, 400, 500, 10)
 grid = Map.Map([
+    ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -44,8 +45,6 @@ camera = Camera.Camera(game)
 launched = True
 
 while launched:
-    # print(pg.sprite.spritecollide(game.player, ppt.sprites_wall, True))
-
     # Affichage des elements :
     # Fond
     window_surface.fill(ppt.black_color)
@@ -55,21 +54,21 @@ while launched:
         if wall in ppt.all_moving_sprites:
             window_surface.blit(wall.image, wall.rect)
 
-     # Echelles
+    # Echelles
     for ladder in ppt.sprites_ladder:
         if ladder in ppt.all_moving_sprites:
             window_surface.blit(ladder.image, ladder.rect)
 
     # Joueur
-    player.fall_update()
+    game.player.fall_update()
     window_surface.blit(player.image, player.rect)
+
+    # Mouvement
+    camera.move()
 
     # Mise a jour de l'ecran
     pg.display.flip()
     fpsClock.tick(ppt.FPS)
-
-    # Mouvement
-    camera.move()
 
     # Gestion des evenements pygame
     for event in pg.event.get():

@@ -5,7 +5,7 @@ import properties as ppt
 
 class Entity(pg.sprite.Sprite):
 
-    def __init__(self, health: int, speed: int, x: int, y: int, bag_max: int, sprite: str):
+    def __init__(self, health: int, speed: int, jumpAcc: int, x: int, y: int, size: float, bag_max: int, sprite: str):
         """
         :param health: Vie initiale de l'entité
         :param speed: Vitesse
@@ -20,13 +20,14 @@ class Entity(pg.sprite.Sprite):
         self.max_health = health
         self.health = health
         self.speed = speed
+        self.size = size    # En nombre de block
 
         # Statistique de vitesse a terre
         self.walkingSpeed = speed
-        self.runningSpeed = speed * 3/2
+        self.runningSpeed = speed * 3 / 2
 
         # Statistique de vitesse aerienne
-        self.jumpAcceleration = 30
+        self.jumpAcceleration = jumpAcc
         self.jumpSpeed = 0
 
         # Dis si l'entite est dans les airs
@@ -45,6 +46,7 @@ class Entity(pg.sprite.Sprite):
         ppt.sprites_entity.add(self)
         ppt.all_moving_sprites.add(self)
 
+    # Recuperation des informations
     def get_coord(self):
         """
         :return: Coordonnees du joueur
@@ -68,7 +70,7 @@ class Entity(pg.sprite.Sprite):
         self.rect.y -= self.speed
 
     def jump(self):
-        if not self.isFalling() and not pg.sprite.spritecollide(self, ppt.sprites_ladder, False):
+        if not self.isFalling():  # and not pg.sprite.spritecollide(self, ppt.sprites_ladder, False):
             self.jumpSpeed = self.jumpAcceleration
 
     # Modificateur de vitesse
@@ -82,12 +84,12 @@ class Entity(pg.sprite.Sprite):
         if self.jumpSpeed > 0:
             return True
 
-        if len(pg.sprite.spritecollide(self, ppt.sprites_ladder, False)) != 0:
+        if pg.sprite.spritecollide(self, ppt.sprites_ladder, False):
             return False
 
         self.move_down()
         fall = False
-        if len(pg.sprite.spritecollide(self, ppt.sprites_wall, False)) == 0:
+        if not pg.sprite.spritecollide(self, ppt.sprites_wall, False):
             fall = True
         self.move_up()
 
@@ -105,3 +107,11 @@ class Entity(pg.sprite.Sprite):
                 elif self.jumpSpeed < 0:
                     self.rect.bottom = colliding_sprites[0].rect.top
                 self.jumpSpeed = 0
+
+    # Convertisseur de taille
+    def rescale(self, block_size):
+        coord = self.rect.x, self.rect.y
+        ratio = self.image.get_height()/self.image.get_width()
+        self.image = pg.transform.scale(self.image, (block_size, block_size*ratio))
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = coord

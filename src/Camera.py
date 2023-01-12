@@ -67,3 +67,4 @@ class Camera:
                     if self.game.player.rect.bottom - sprite.rect.top >= 0:
                         self.game.player.move_up()
                         break
+
