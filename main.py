@@ -95,3 +95,8 @@ while launched:
             # Si on n'appuie plus sur MAJ ne cours plus
             if event.key == pg.K_LSHIFT:
                 player.walk()
+
+        # Utilisation d'arme
+        if event.type == pg.BUTTON_LEFT:
+            # il faut une arme
+            if 
