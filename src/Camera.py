@@ -36,6 +36,7 @@ class Camera:
 
     # Combinaison des methodes plus hauts
     def move(self):
+        # Gestion des murs
         if self.game.keypressed.get(pg.K_q):
             self.move_left()
             for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
@@ -50,35 +51,19 @@ class Camera:
                     self.move_left(self.game.player.rect.right - sprite.rect.left)
                     break
 
-        # if self.game.keypressed.get(pg.K_z):
-        #     if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
-        #         self.move_up()
-        #         for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
-        #             if sprite.rect.bottom - self.game.player.rect.top >= 0:
-        #                 self.move_down(sprite.rect.bottom - self.game.player.rect.top)
-        #                 break
-
-        # if self.game.keypressed.get(pg.K_s):
-        #     if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
-        #         self.move_down()
-        #         for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
-        #             if sprite.rect.top - self.game.player.rect.bottom <= 0:
-        #                 self.move_left(self.game.player.rect.bottom - sprite.rect.top)
-        #                 break
-
+        # Gestion des echelles  / Murs
         if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
             
             if self.game.keypressed.get(pg.K_z):
+                self.game.player.move_up()
                 for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
                     if self.game.player.rect.top - sprite.rect.bottom <= 0:
-                        self.game.player.move_up()
-                        break
-                self.game.player.move_up()
-
-            if self.game.keypressed.get(pg.K_s):
-                for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
-                    if self.game.player.rect.bottom - sprite.rect.top >= 0:
                         self.game.player.move_down()
                         break
+
+            if self.game.keypressed.get(pg.K_s):
                 self.game.player.move_down()
-                
+                for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
+                    if self.game.player.rect.bottom - sprite.rect.top >= 0:
+                        self.game.player.move_up()
+                        break
