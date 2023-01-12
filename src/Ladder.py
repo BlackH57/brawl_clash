@@ -1,7 +1,7 @@
-from src import Barrier
+from src import Obstacle
 
 
-class Ladder(Barrier.Barrier):
+class Ladder(Obstacle.Obstacle):
 
     def __init__(self, x: int, y: int):
         super().__init__(x, y, "Sprites/Ladder.png")

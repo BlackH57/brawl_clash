@@ -82,6 +82,9 @@ class Entity(pg.sprite.Sprite):
         if self.jumpSpeed > 0:
             return True
 
+        if len(pg.sprite.spritecollide(self, ppt.sprites_ladder, False)) != 0:
+            return False
+
         self.move_down()
         fall = False
         if len(pg.sprite.spritecollide(self, ppt.sprites_wall, False)) == 0:
