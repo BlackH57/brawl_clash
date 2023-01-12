@@ -112,6 +112,6 @@ class Entity(pg.sprite.Sprite):
     def rescale(self, block_size):
         coord = self.rect.x, self.rect.y
         ratio = self.image.get_height()/self.image.get_width()
-        self.image = pg.transform.scale(self.image, (block_size, block_size*ratio))
+        self.image = pg.transform.scale(self.image, (self.size*block_size, self.size*block_size*ratio))
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = coord

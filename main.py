@@ -65,10 +65,11 @@ while launched:
     for ladder in ppt.sprites_ladder:
         if ladder in ppt.all_moving_sprites:
             window_surface.blit(ladder.image, ladder.rect)
-
-    # Joueur
-    game.player.fall_update()
-    window_surface.blit(player.image, player.rect)
+    
+    # Entity
+    for entity in ppt.sprites_entity.sprites():
+        entity.fall_update()
+        window_surface.blit(entity.image, entity.rect)
 
     # Balles
     for bullet in ppt.sprites_bullet:
