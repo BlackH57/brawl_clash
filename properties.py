@@ -10,4 +10,5 @@ FPS = 60  # image par seconde
 sprites_wall = pg.sprite.Group()
 sprites_ladder = pg.sprite.Group()
 sprites_entity = pg.sprite.Group()
+sprites_mob = pg.sprite.Group()
 all_moving_sprites = pg.sprite.Group()
