@@ -23,7 +23,7 @@ class Entity(pg.sprite.Sprite):
 
         # Statistique de vitesse a terre
         self.walkingSpeed = speed
-        self.runningSpeed = speed * 2
+        self.runningSpeed = speed * 3/2
 
         # Statistique de vitesse aerienne
         self.jumpAcceleration = 30
@@ -68,7 +68,6 @@ class Entity(pg.sprite.Sprite):
         self.rect.y -= self.speed
 
     def jump(self):
-        print("je saute")
         if not self.isFalling():
             self.jumpSpeed = self.jumpAcceleration
 
