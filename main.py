@@ -113,6 +113,6 @@ while launched:
             # verifier nbr balles
             #if player.weapon.magazine > 0:
                 norme = math.sqrt( (pygame.mouse.get_pos()[0] - player.rect.x)**2 + (pygame.mouse.get_pos()[1] - player.rect.y)**2 )
-                player.shoot((pygame.mouse.get_pos()[0] - player.rect.x)/norme, (pygame.mouse.get_pos()[1] - player.rect.y)/norme)
+                player.shoot((pygame.mouse.get_pos()[0] - player.rect.midright[0])/norme, (pygame.mouse.get_pos()[1] - player.rect.midright[0])/norme)
                 
 

@@ -11,5 +11,5 @@ class Player(Entity.Entity):
         ppt.all_moving_sprites.remove(self)
 
     def shoot(self, dir_x: int, dir_y: int):
-        Projectile.Projectile(self.rect.midright[0], self.rect.midright[1], dir_x, dir_y, 10, self.weapon.dmg, "Sprites/bullet.png")
+        Projectile.Projectile(self.rect.midright[0], self.rect.midright[1], dir_x, dir_y, 40, self.weapon.dmg, "Sprites/bullet.png")
 

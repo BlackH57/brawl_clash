@@ -33,7 +33,7 @@ class Projectile(pg.sprite.Sprite):
         if pg.sprite.spritecollide(self, ppt.sprites_wall, False):
             ppt.sprites_bullet.remove(self)
             ppt.all_moving_sprites.remove(self)
-        if pg.sprite.spritecollide(self, ppt.sprites_mob, False):
+        if pg.sprite.spritecollide(self, ppt.sprites_mob, True):
             ppt.sprites_bullet.remove(self)
             ppt.all_moving_sprites.remove(self)
             # mettre des degats

@@ -16,8 +16,7 @@ class Weapon(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         
     
-    def shoot(self, dir_x: int, dir_y: int):
-        bullet = Projectile.Projectile(self.rect.centerx, self.rect.centery, dir_x, dir_y, 10, self.dmg, "Sprites/bullet.png")
+
 
     
 
