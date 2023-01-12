@@ -1,5 +1,5 @@
 import pygame as pg
-
+import properties as ppt
 
 class Obstacle(pg.sprite.Sprite):
 
@@ -15,6 +15,8 @@ class Obstacle(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+        ppt.all_moving_sprites.add(self)
 
     def rescale(self, size):
         rect = self.rect.x, self.rect.y

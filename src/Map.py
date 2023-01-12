@@ -2,7 +2,7 @@ import pygame as pg
 import properties as ppt
 from src import Wall
 from src import Ladder
-
+from src import Mob
 
 class Map:
     def __init__(self, list_case: list[list[str]]):
@@ -18,15 +18,53 @@ class Map:
         # Dessinons la grille
         for j, colonne in enumerate(self.map):
             for i, block in enumerate(colonne):
+                # Mur
                 if block == "W":
                     wall = Wall.Wall(i * size_block, j * size_block)
                     wall.rescale(size_block)
                     self.walls.append(wall)
-                    ppt.sprites_wall.add(wall)
-                    ppt.all_moving_sprites.add(wall)
 
-                if block == "L":
+
+                # Echelle
+                elif block == "L":
                     ladder = Ladder.Ladder(i * size_block, j * size_block)
                     ladder.rescale(size_block)
-                    ppt.sprites_ladder.add(ladder)
-                    ppt.all_moving_sprites.add(ladder)
+
+                # Joueur
+                # elif block == "P":
+
+                # Slime / Blob
+                elif block == "B":
+                    print("Blob")
+                    blob = Mob.Slime(i * size_block, j * size_block)
+                    blob.rescale(size_block)
+
+                # Coffre
+                elif block == "C":
+                    print("Coffre")
+                    coffre = Mob.Coffre(i * size_block, j * size_block)
+                    coffre.rescale(size_block)
+
+                # Lynx
+                elif block == "X":
+                    print("Lynx")
+                    lynx = Mob.Lynx(i * size_block, j * size_block)
+                    lynx.rescale(size_block)
+
+                # Robot
+                elif block == "R":
+                    print("Robot")
+                    robot = Mob.Robot(i * size_block, j * size_block)
+                    robot.rescale(size_block)
+
+                # Kangoo
+                elif block == "K":
+                    print("Kangoo")
+                    kangoo = Mob.Kangoo(i * size_block, j * size_block)
+                    kangoo.rescale(size_block)
+
+                # Larve / Slug
+                elif block == "S":
+                    print("Larve")
+                    larve = Mob.Larve(i * size_block, j * size_block)
+                    larve.rescale(size_block)
