@@ -96,7 +96,7 @@ while launched:
             if event.key == pg.K_LSHIFT:
                 player.walk()
 
-        # Utilisation d'arme
-        if event.type == pg.BUTTON_LEFT:
-            # il faut une arme
-            if 
+        # # Utilisation d'arme
+        # if event.type == pg.BUTTON_LEFT:
+        #     # il faut une arme
+        #     if 
