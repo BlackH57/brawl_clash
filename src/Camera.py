@@ -10,6 +10,7 @@ class Camera:
         dist_used = self.game.player.speed
         if dist is not None:
             dist_used = dist
+        # print("déplacé de ", dist_used, "vers la droite")
         for sprite in ppt.all_moving_sprites.sprites():
             sprite.rect.x -= dist_used
 
@@ -17,6 +18,8 @@ class Camera:
         dist_used = self.game.player.speed
         if dist is not None:
             dist_used = dist
+        # print("déplacé de ", dist_used, "vers la gauche")
+
         for sprite in ppt.all_moving_sprites.sprites():
             sprite.rect.x += dist_used
 
@@ -52,8 +55,8 @@ class Camera:
                     break
 
         # Gestion des echelles  / Murs
-        if len(pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)) != 0:
-            
+        ladders = pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False)
+        if ladders:
             if self.game.keypressed.get(pg.K_z):
                 self.game.player.move_up()
                 for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
@@ -61,10 +64,12 @@ class Camera:
                         self.game.player.move_down()
                         break
 
+                if not pg.sprite.spritecollide(self.game.player, ppt.sprites_ladder, False):
+                    self.game.player.rect.bottom = ladders[0].rect.top-1
+
             if self.game.keypressed.get(pg.K_s):
                 self.game.player.move_down()
                 for sprite in pg.sprite.spritecollide(self.game.player, ppt.sprites_wall, False):
                     if self.game.player.rect.bottom - sprite.rect.top >= 0:
                         self.game.player.move_up()
                         break
-

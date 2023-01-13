@@ -18,16 +18,17 @@ class Map:
         # Dessinons la grille
         for j, colonne in enumerate(self.map):
             for i, block in enumerate(colonne):
+                position = (i+4) * size_block, j * size_block
                 # Mur
                 if block == "W":
-                    wall = Wall.Wall(i * size_block, j * size_block)
+                    wall = Wall.Wall(position[0], position[1])
                     wall.rescale(size_block)
                     self.walls.append(wall)
 
 
                 # Echelle
                 elif block == "L":
-                    ladder = Ladder.Ladder(i * size_block, j * size_block)
+                    ladder = Ladder.Ladder(position[0], position[1])
                     ladder.rescale(size_block)
 
                 # Joueur
@@ -36,35 +37,35 @@ class Map:
                 # Slime / Blob
                 elif block == "B":
                     print("Blob")
-                    blob = Mob.Slime(i * size_block, j * size_block)
+                    blob = Mob.Slime(position[0], position[1])
                     blob.rescale(size_block)
 
                 # Coffre
                 elif block == "C":
                     print("Coffre")
-                    coffre = Mob.Coffre(i * size_block, j * size_block)
+                    coffre = Mob.Coffre(position[0], position[1])
                     coffre.rescale(size_block)
 
                 # Lynx
                 elif block == "X":
                     print("Lynx")
-                    lynx = Mob.Lynx(i * size_block, j * size_block)
+                    lynx = Mob.Lynx(position[0], position[1])
                     lynx.rescale(size_block)
 
                 # Robot
                 elif block == "R":
                     print("Robot")
-                    robot = Mob.Robot(i * size_block, j * size_block)
+                    robot = Mob.Robot(position[0], position[1])
                     robot.rescale(size_block)
 
                 # Kangoo
                 elif block == "K":
                     print("Kangoo")
-                    kangoo = Mob.Kangoo(i * size_block, j * size_block)
+                    kangoo = Mob.Kangoo(position[0], position[1])
                     kangoo.rescale(size_block)
 
                 # Larve / Slug
                 elif block == "S":
                     print("Larve")
-                    larve = Mob.Larve(i * size_block, j * size_block)
+                    larve = Mob.Larve(position[0], position[1])
                     larve.rescale(size_block)

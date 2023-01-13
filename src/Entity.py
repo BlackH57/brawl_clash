@@ -24,7 +24,7 @@ class Entity(pg.sprite.Sprite):
 
         # Statistique de vitesse a terre
         self.walkingSpeed = speed
-        self.runningSpeed = speed * 3 / 2
+        self.runningSpeed = int(speed * 3 / 2)
 
         # Statistique de vitesse aerienne
         self.jumpAcceleration = jumpAcc
@@ -88,12 +88,16 @@ class Entity(pg.sprite.Sprite):
             return False
 
         self.move_down()
-        fall = False
-        if not pg.sprite.spritecollide(self, ppt.sprites_wall, False):
-            fall = True
-        self.move_up()
 
-        return fall
+        collision = pg.sprite.spritecollide(self, ppt.sprites_wall, False)
+
+        if not collision:
+            self.move_up()
+            return True
+
+        else:
+            self.rect.bottom = collision[0].rect.top
+            return False
 
     def fall_update(self):
         # On regarde si on tombe
@@ -102,6 +106,7 @@ class Entity(pg.sprite.Sprite):
             self.jumpSpeed -= 2
             colliding_sprites = pg.sprite.spritecollide(self, ppt.sprites_wall, False)
             if colliding_sprites:
+                print(colliding_sprites)
                 if self.jumpSpeed > 0:
                     self.rect.top = colliding_sprites[0].rect.bottom
                 elif self.jumpSpeed < 0:
@@ -115,3 +120,12 @@ class Entity(pg.sprite.Sprite):
         self.image = pg.transform.scale(self.image, (self.size*block_size, self.size*block_size*ratio))
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = coord
+
+    def hurt(self, damage):
+        self.health -= damage
+
+        # S'il n'a plus de vie il meurt
+        if self.health < 0:
+            ppt.all_moving_sprites.remove(self)
+            ppt.sprites_mob.remove(self)
+            ppt.sprites_entity.remove(self)

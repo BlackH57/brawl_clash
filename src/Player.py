@@ -8,7 +8,7 @@ import pygame as pg
 class Player(Entity.Entity):
     def __init__(self, weapon):
         self.weapon = weapon
-        super().__init__(100, 10, 30, 400, 500, 1.5, 10, "Sprites/Soldat.png")
+        super().__init__(100, 10, 40, 400, 500, 1, 10, "Sprites/Soldat.png")
         ppt.all_moving_sprites.remove(self)
 
     def shoot(self):

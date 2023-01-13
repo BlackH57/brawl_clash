@@ -5,13 +5,14 @@ import pygame as pg
 
 class Projectile(pg.sprite.Sprite):
 
-    def __init__(self, x: int, y: int, dir_x: int, dir_y: int, speed: int, dmg: int, sprite):
+    def __init__(self, x: int, y: int, dir_x: int, dir_y: int, speed: int, damage: int, sprite):
+        print("Je suis créé")
         pg.sprite.Sprite.__init__(self)
         
         self.dir_x = dir_x
         self.dir_y = dir_y
         self.speed = speed
-        self.dmg = dmg
+        self.damage = damage
 
         # Image
         self.image = pg.image.load("Sprites/bullet.png").convert_alpha()
@@ -38,8 +39,7 @@ class Projectile(pg.sprite.Sprite):
             ppt.all_moving_sprites.remove(self)
 
             # Fait des degats aux monstres
-            ppt.all_moving_sprites.remove(sprite)
-            ppt.sprites_mob.remove(sprite)
-            ppt.sprites_entity.remove(sprite)
+            sprite.hurt(self.damage)
+
 
             # mettre des degats
