@@ -2,6 +2,7 @@ from src import Object
 import properties as ppt
 import pygame as pg
 
+
 class Projectile(pg.sprite.Sprite):
 
     def __init__(self, x: int, y: int, dir_x: int, dir_y: int, speed: int, dmg: int, sprite):
@@ -22,8 +23,6 @@ class Projectile(pg.sprite.Sprite):
 
         ppt.sprites_bullet.add(self)
         ppt.all_moving_sprites.add(self)
-        
-
 
     def move(self):
         self.rect.x += (self.speed * self.dir_x)
@@ -33,7 +32,14 @@ class Projectile(pg.sprite.Sprite):
         if pg.sprite.spritecollide(self, ppt.sprites_wall, False):
             ppt.sprites_bullet.remove(self)
             ppt.all_moving_sprites.remove(self)
-        if pg.sprite.spritecollide(self, ppt.sprites_mob, True):
+        for sprite in pg.sprite.spritecollide(self, ppt.sprites_mob, False):    # True temporaire
+            # Supprime le sprite de la balle
             ppt.sprites_bullet.remove(self)
             ppt.all_moving_sprites.remove(self)
+
+            # Fait des degats aux monstres
+            ppt.all_moving_sprites.remove(sprite)
+            ppt.sprites_mob.remove(sprite)
+            ppt.sprites_entity.remove(sprite)
+
             # mettre des degats
